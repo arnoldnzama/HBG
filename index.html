@@ -214,6 +214,39 @@
             left: 100%;
             transition: all 0.5s ease-in-out;
         }
+
+        /* New button animation */
+        .btn-learn-more {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .btn-learn-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: -1;
+            transition: all 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .btn-learn-more:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn-learn-more:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
         
         .nav-link {
             position: relative;
@@ -510,7 +543,10 @@
                     <h2 class="text-3xl font-bold text-primary mb-6">Notre entreprise</h2>
                     <p class="text-gray-700 mb-6">HBG Internationale est une entreprise congolaise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
                     <p class="text-gray-700 mb-6">Grâce à une expertise multisectorielle, nous transformons les ambitions de nos clients en résultats mesurables. Notre approche collaborative nous permet de comprendre vos besoins spécifiques et de fournir des solutions adaptées.</p>
-                    <p class="text-gray-700">Que vous soyez une entreprise, une ONG ou un particulier, notre équipe dévouée est prête à vous accompagner dans la réalisation de vos projets avec professionnalisme et créativité.</p>
+                    <p class="text-gray-700 mb-8">Que vous soyez une entreprise, une ONG ou un particulier, notre équipe dévouée est prête à vous accompagner dans la réalisation de vos projets avec professionnalisme et créativité.</p>
+                    <a href="propos.html" class="btn-learn-more inline-block border-2 border-primary text-primary font-bold py-3 px-8 rounded-full transition-all duration-300">
+                        <span class="relative z-10">Savoir plus</span>
+                    </a>
                 </div>
                 <div class="md:w-1/2 slide-up">
                     <div class="relative">
