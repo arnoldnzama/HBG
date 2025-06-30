@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBG - Galerie vidéo de nos services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .animate-bounce-in {
+            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        
+        :root {
+            --primary: #002580;
+            --secondary: #fb0709;
+            --accent: #2178f9;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: white;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .text-secondary {
+            color: var(--secondary);
+        }
+        
+        .bg-accent {
+            background-color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 37, 128, 0.8), rgba(0, 37, 128, 0.8)), url('https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .value-card:hover .value-icon {
+            transform: rotateY(180deg);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Video gallery styles */
+        .video-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            height: 180px;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(251, 7, 9, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .video-card:hover .play-button {
+            background-color: rgba(251, 7, 9, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .play-button i {
+            color: white;
+            font-size: 24px;
+            margin-left: 5px;
+        }
+        
+        .video-info {
+            padding: 1.25rem;
+            background-color: white;
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+        }
+        
+        /* Modal styles */
+        .video-modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .video-modal-content {
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        .video-modal.active .video-modal-content {
+            transform: scale(1);
+        }
+        
+        /* Filter buttons */
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Animation for video items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .video-animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Floating animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Responsive video container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-36 md:h-40 transition-transform hover:scale-105">
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="navbar-burger flex items-center text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-primary">Accueil</a>
+                    <a href="index.html#values" class="nav-link text-gray-700 hover:text-primary">Valeurs</a>
+                    <a href="index.html#services" class="nav-link text-gray-700 hover:text-primary">Services</a>
+                    <a href="index.html#products" class="nav-link text-gray-700 hover:text-primary">Produits</a>
+                    <div class="relative group">
+                        <button class="nav-link text-gray-700 hover:text-primary flex items-center">
+                            Média
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="images.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Images</a>
+                            <a href="videos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Vidéos</a>
+                        </div>
+                    </div>
+                    <a href="index.html#team" class="nav-link text-gray-700 hover:text-primary">Équipe</a>
+                    <a href="index.html#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+                    <a href="index.html#contact" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition">Devis</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="navbar-menu hidden relative z-50">
+            <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+            <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+                <div class="flex items-center mb-8">
+                    <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-36 md:h-40 transition-transform hover:scale-105">
+                    </a>
+                    <button class="navbar-close ml-auto bg-primary text-white p-2 rounded-full hover:bg-opacity-90 transition">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-primary px-4 py-2">Accueil</a>
+                    <a href="index.html#values" class="nav-link text-gray-700 hover:text-primary px-4 py-2">Valeurs</a>
+                    <a href="index.html#services" class="nav-link text-gray-700 hover:text-primary px-4 py-2">Services</a>
+                    <a href="index.html#products" class="nav-link text-gray-700 hover:text-primary px-4 py-2">Produits</a>
+                    <div class="relative group">
+                        <button class="nav-link text-gray-700 hover:text-primary flex items-center px-4 py-2 w-full">
+                            Média
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="ml-4 mt-1 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block">
+                            <a href="images.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Images</a>
+                            <a href="videos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Vidéos</a>
+                        </div>
+                    </div>
+                    <a href="index.html#team" class="nav-link text-gray-700 hover:text-primary px-4 py-2">Équipe</a>
+                    <a href="index.html#contact" class="nav-link text-gray-700 hover:text-primary px-4 py-2">Contact</a>
+                    <a href="index.html#contact" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition w-full text-center">Devis</a>
+                </div>
+                <div class="mt-auto">
+                    <div class="pt-6">
+                        <a class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-primary hover:bg-opacity-90 text-white rounded" href="index.html#contact">Demander un devis</a>
+                    </div>
+                    <p class="my-4 text-xs text-center text-gray-500">
+                        <span>© 2025 HBG Internationale</span>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    
+
+    <!-- Video Gallery Section -->
+    <section id="videos" class="py-16 bg-white w-full">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos services en vidéo</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Explorez notre expertise à travers ces vidéos qui illustrent la qualité de nos prestations</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition active" data-filter="all">Tous</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="menage">Femmes ménagères</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="protocol">Protocole</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="photo">Photographie</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="logistique">Logistique</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="equipe">Notre équipe</button>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <!-- Video 1 -->
+                <div class="video-card video-animate" data-category="menage">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Service de ménage professionnel">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">3:45</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="font-bold text-md text-primary mb-2">Service de ménage professionnel</h3>
+                        <p class="text-gray-600 text-xs">Découvrez notre méthode de travail pour un nettoyage impeccable</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card video-animate" data-category="protocol">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Service de protocole">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">2:30</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="font-bold text-lg text-primary mb-2">Service de protocole</h3>
+                        <p class="text-gray-600 text-sm">Organisation d'événements avec élégance et professionnalisme</p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card video-animate" data-category="photo">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Service photographique">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">4:15</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="font-bold text-lg text-primary mb-2">Service photographique</h3>
+                        <p class="text-gray-600 text-sm">Capturer les moments importants avec notre équipe professionnelle</p>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-card video-animate" data-category="logistique">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Service logistique">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">5:20</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="font-bold text-lg text-primary mb-2">Service logistique</h3>
+                        <p class="text-gray-600 text-sm">Gestion optimale des flux et des stocks pour vos événements</p>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="video-card video-animate" data-category="equipe">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Notre équipe">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">6:10</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="font-bold text-lg text-primary mb-2">Notre équipe</h3>
+                        <p class="text-gray-600 text-sm">Découvrez les professionnels dévoués à votre service</p>
+                    </div>
+                </div>
+
+                <!-- Video 6 -->
+                <div class="video-card video-animate" data-category="menage">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Formation ménage">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">3:25</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="font-bold text-lg text-primary mb-2">Formation ménage</h3>
+                        <p class="text-gray-600 text-sm">Nos équipes suivent des formations régulières pour un service optimal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button id="loadMoreVideos" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition">Charger plus de vidéos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-2 sm:p-4 overflow-auto">
+        <div class="video-modal-content bg-white rounded-lg w-full relative">
+            <button id="closeVideoModal" class="absolute -top-10 right-0 text-white hover:text-accent text-3xl z-50">
+                &times;
+            </button>
+            <div class="p-4">
+                <div class="video-container">
+                    <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="mt-4 p-4">
+                    <h3 id="videoModalTitle" class="text-xl font-bold text-primary"></h3>
+                    <p id="videoModalDescription" class="text-gray-700 mt-2"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Témoignages clients</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Ce que nos clients disent de nos services après avoir vu nos vidéos</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Les vidéos de HBG m'ont permis de comprendre exactement comment leur équipe travaille. Le professionnalisme est évident dans chaque détail."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-primary">Marie K.</h4>
+                            <p class="text-gray-500 text-sm">Directrice d'hôtel</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"La vidéo sur leur service logistique m'a convaincu de faire appel à eux pour notre événement annuel. Tout s'est déroulé à la perfection."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-primary">Jean P.</h4>
+                            <p class="text-gray-500 text-sm">Organisateur d'événements</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Après avoir vu leur vidéo sur le service de ménage, j'ai immédiatement contacté HBG. Leur équipe a dépassé toutes mes attentes."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-primary">Sophie L.</h4>
+                            <p class="text-gray-500 text-sm">Propriétaire de résidence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Prêt à travailler avec nous?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Nos vidéos vous ont convaincu? Contactez-nous pour discuter de votre projet.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="index.html#contact" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">Nous contacter</a>
+                <a href="index.html#contact" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition duration-300">Demander un devis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- About -->
+                <div>
+                   <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <p class="mb-4">Entreprise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-accent transition">Accueil</a></li>
+                        <li><a href="index.html#services" class="hover:text-accent transition">Services</a></li>
+                        <li><a href="index.html#products" class="hover:text-accent transition">Produits</a></li>
+                        <li><a href="videos.html" class="hover:text-accent transition">Vidéos</a></li>
+                        <li><a href="index.html#contact" class="hover:text-accent transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-accent transition">Communication numérique</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Recrutement</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Services ménagers</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Infographie</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Logistique</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#contact" class="hover:text-accent transition">Nous contacter</a></li>
+                        <li><a href="index.html#contact" class="hover:text-accent transition">Demander un devis</a></li>
+                        <li><a href="index.html#faq" class="hover:text-accent transition">FAQ</a></li>
+                        <li><a href="index.html#team" class="hover:text-accent transition">Notre équipe</a></li>
+                        <li><a href="index.html#about" class="hover:text-accent transition">À propos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const burgerButton = document.querySelector('.navbar-burger');
+        const closeButton = document.querySelector('.navbar-close');
+        const mobileMenu = document.querySelector('.navbar-menu');
+
+        burgerButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Media submenu toggle in mobile
+        document.querySelectorAll('.media-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const submenu = this.nextElementSibling;
+                const icon = this.querySelector('svg');
+                
+                submenu.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Navigation scroll smooth
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#') && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Load more videos
+        let currentPage = 1;
+        const videosPerPage = 6;
+        function loadMoreVideos() {
+            // Si vous ajoutez plus de vidéos, adaptez ici
+            document.getElementById('loadMoreVideos').classList.add('hidden');
+        }
+        document.getElementById('loadMoreVideos').addEventListener('click', loadMoreVideos);
+
+        // Video modal
+        document.querySelectorAll('.video-card .play-button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.video-card');
+                // Ajoutez l'attribut data-video sur chaque .video-card pour que ceci fonctionne :
+                let videoSrc = card.getAttribute('data-video');
+                // Si data-video n'existe pas, fallback sur une vidéo par défaut
+                if (!videoSrc) videoSrc = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+                const videoTitle = card.querySelector('.video-info h3').innerText;
+                const videoDescription = card.querySelector('.video-info p').innerText;
+
+                document.getElementById('videoPlayer').src = videoSrc + '?autoplay=1';
+                document.getElementById('videoModalTitle').innerText = videoTitle;
+                document.getElementById('videoModalDescription').innerText = videoDescription;
+
+                document.getElementById('videoModal').classList.add('active');
+                document.documentElement.style.overflow = 'hidden';
+            });
+        });
+
+        document.getElementById('closeVideoModal').addEventListener('click', function() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('videoPlayer').src = '';
+            document.body.style.overflow = 'auto';
+        });
+
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.getElementById('videoPlayer').src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Media submenu toggle in desktop
+        document.querySelectorAll('.media-toggle-desktop').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const submenu = this.nextElementSibling;
+                const icon = this.querySelector('svg');
+                
+                submenu.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Close submenu when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.media-submenu-desktop').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+            document.querySelectorAll('.media-toggle-desktop svg').forEach(icon => {
+                icon.classList.remove('rotate-180');
+            });
+        });
+
+        // Filter videos
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                document.querySelectorAll('.video-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+    </script>
+</body>
+</html>

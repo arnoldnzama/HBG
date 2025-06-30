@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBG - Notre Histoire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002580;
+            --secondary: #fb0709;
+            --accent: #2178f9;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .text-secondary {
+            color: var(--secondary);
+        }
+        
+        .bg-accent {
+            background-color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        
+        .timeline-item:hover .timeline-icon {
+            transform: rotate(15deg) scale(1.1);
+            color: var(--accent);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .transform {
+            will-change: transform;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: var(--accent);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after,
+        .nav-link-mobile::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link-mobile:hover::after {
+            width: 100%;
+        }
+
+        .nav-link-mobile {
+            position: relative;
+        }
+        
+        .milestone-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 37, 128, 0.2);
+        }
+        
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-glow:hover::before {
+            left: 100%;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(251, 7, 9, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(251, 7, 9, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(251, 7, 9, 0);
+            }
+        }
+        
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .team-card:hover .team-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .team-overlay {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                padding-left: 80px;
+            }
+            
+            .timeline-item::before {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-36 md:h-40 transition-transform hover:scale-105">
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="navbar-burger flex items-center text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-primary">Accueil</a>
+                    <a href="histoire.html" class="nav-link text-primary font-semibold">Notre Histoire</a>
+                    <a href="services.html" class="nav-link text-gray-700 hover:text-primary">Services</a>
+                    <a href="produits.html" class="nav-link text-gray-700 hover:text-primary">Produits</a>
+                    <div class="relative group">
+                        <button class="nav-link text-gray-700 hover:text-primary flex items-center">
+                            Média
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="images.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Images</a>
+                            <a href="videos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Vidéos</a>
+                        </div>
+                    </div>
+                    <a href="equipe.html" class="nav-link text-gray-700 hover:text-primary">Équipe</a>
+                    <a href="contact.html" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+                    <a href="contact.html#devis" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">
+                        <span class="relative z-10">Devis</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="navbar-menu hidden relative z-50">
+            <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+            <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+                <div class="flex items-center mb-8">
+                    <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <button class="navbar-close">
+                        <svg class="h-6 w-6 text-gray-500 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-1">
+                            <a class="nav-link-mobile block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="index.html">Accueil</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="nav-link-mobile block p-4 text-sm font-semibold text-primary bg-gray-100 rounded" href="histoire.html">Notre Histoire</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="nav-link-mobile block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="services.html">Services</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="nav-link-mobile block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="produits.html">Produits</a>
+                        </li>
+                        <li class="mb-1 relative group">
+                            <a href="#" class="flex items-center justify-between w-full p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded">
+                                Média
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <ul class="pl-4 hidden group-hover:block">
+                                <li>
+                                    <a href="images.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Images</a>
+                                </li>
+                                <li>
+                                    <a href="videos.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Vidéos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="equipe.html">Équipe</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <div class="pt-6">
+                        <a class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-primary hover:bg-opacity-90 text-white rounded" href="contact.html#devis">Demander un devis</a>
+                    </div>
+                    <p class="my-4 text-xs text-center text-gray-500">
+                        <span>© 2025 HBG Internationale</span>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="flex flex-col md:flex-row fade-in">
+        <!-- Image Block -->
+        <div class="w-full md:w-1/2 h-96 md:h-auto" 
+             style="background: url('img/hbg.png'); 
+                    background-size: cover; 
+                    background-position: center;">
+        </div>
+        
+        <!-- Text Block -->
+        <div class="w-full md:w-1/2 bg-primary text-white py-20 md:py-32 flex items-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-up">Notre Histoire</h1>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl slide-up">Découvrez le parcours qui a façonné HBG et notre engagement envers l'excellence</p>
+                <div class="slide-up">
+                    <a href="#histoire" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 btn-pulse">
+                        Explorer notre histoire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="histoire" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 slide-up">
+                    <h2 class="text-3xl font-bold text-primary mb-6">Notre entreprise</h2>
+                    <p class="text-gray-700 mb-6">Notre équipe passionnée et créative travaille main dans la main avec nos Clients pour développer des campagnes sur mesure qui captivent et engagent. Avec une approche axée sur les résultats et une expertise approfondie dans divers secteurs, on s'engage à propulser votre marque vers de nouveaux sommets. Ensemble, faisons de votre vision une réalité.</p>
+                    <p class="text-gray-700 mb-8">Nous croyons fermement que chaque marque a une histoire unique à raconter, et nous sommes là pour vous aider à la partager avec le monde. Grâce à des stratégies innovantes et à une utilisation judicieuse des dernières technologies, nous veillons à ce que votre message résonne auprès de votre public cible. Collaborons pour créer des expériences mémorables qui laisseront une empreinte durable et renforceront la fidélité à votre marque. Rejoignez-nous pour transformer votre ambition en succès visible et mesurable.</p>
+                    <div class="flex space-x-4">
+                        <a href="#valeurs" class="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition-all duration-300 btn-glow">
+                            <span class="relative z-10">Nos Valeurs</span>
+                        </a>
+                        <a href="#equipe" class="inline-block border-2 border-primary text-primary px-6 py-3 rounded-md hover:bg-primary hover:text-white transition-all duration-300">
+                            Rencontrer l'équipe
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 slide-up">
+                    <div class="relative overflow-hidden group">
+                        <img src="img/13.jpg" alt="Notre équipe" 
+                             class="rounded-lg w-full shadow-xl transform transition-all duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute -bottom-6 -right-6 bg-accent text-white p-6 rounded-lg shadow-lg transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-6">
+                            <p class="text-xl font-bold">2021</p>
+                            <p class="text-sm">Année de création</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Notre Mission</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Fondé en 2021, HBG est une entreprise congolaise dynamique spécialisée dans la fourniture de matériel professionnel et de solutions logistiques adaptées aux besoins des institutions, entreprises et ONG.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md text-center slide-up">
+                    <div class="text-accent text-4xl mb-6">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Mission</h3>
+                    <p class="text-gray-700">Contribuer activement au développement des secteurs clés en République Démocratique du Congo à travers des produits de qualité, un service fiable et un engagement constant envers la satisfaction client.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md text-center slide-up">
+                    <div class="text-accent text-4xl mb-6">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Vision</h3>
+                    <p class="text-gray-700">Devenir le partenaire de référence en solutions logistiques et matériel professionnel en RDC et dans la sous-région, en combinant innovation et excellence opérationnelle.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md text-center slide-up">
+                    <div class="text-accent text-4xl mb-6">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Slogan</h3>
+                    <p class="text-2xl text-secondary font-bold">L'excellence au service du progrès</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="valeurs" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos Valeurs Fondamentales</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Les principes qui guident chacune de nos actions et décisions</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Value 1 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-accent transition duration-300 slide-up">
+                    <div class="flex items-start mb-4">
+                        <div class="text-accent text-2xl mr-4">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-primary mb-2">Intégrité</h3>
+                            <p class="text-gray-700">Nous agissons avec honnêteté et transparence dans toutes nos relations et transactions commerciales.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-accent transition duration-300 slide-up">
+                    <div class="flex items-start mb-4">
+                        <div class="text-accent text-2xl mr-4">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-primary mb-2">Innovation</h3>
+                            <p class="text-gray-700">Nous cultivons la créativité et adoptons des solutions novatrices pour répondre aux défis changeants.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-accent transition duration-300 slide-up">
+                    <div class="flex items-start mb-4">
+                        <div class="text-accent text-2xl mr-4">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-primary mb-2">Collaboration</h3>
+                            <p class="text-gray-700">Nous croyons en la force du travail d'équipe et valorisons la diversité des compétences et perspectives.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Value 4 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 hover:border-accent transition duration-300 slide-up">
+                    <div class="flex items-start mb-4">
+                        <div class="text-accent text-2xl mr-4">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-primary mb-2">Responsabilité</h3>
+                            <p class="text-gray-700">Nous assumons nos engagements avec sérieux et contribuons positivement au développement de notre communauté.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Notre Parcours</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Les étapes clés de notre développement depuis notre création</p>
+            </div>
+            
+            <div class="relative timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary">2021 - Fondation</h3>
+                        </div>
+                        <p class="text-gray-700">Création de HBG avec une petite équipe dédiée à fournir des solutions logistiques innovantes aux entreprises locales.</p>
+                    </div>
+                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
+                        <span class="font-bold">1</span>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary">2022 - Expansion</h3>
+                        </div>
+                        <p class="text-gray-700">Diversification de nos services et établissement de partenariats stratégiques avec des fournisseurs internationaux.</p>
+                    </div>
+                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
+                        <span class="font-bold">2</span>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary">2023 - Reconnaissance</h3>
+                        </div>
+                        <p class="text-gray-700">Croissance de notre clientèle et reconnaissance comme fournisseur fiable par plusieurs institutions et ONG internationales.</p>
+                    </div>
+                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
+                        <span class="font-bold">3</span>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary">2024 - Innovation</h3>
+                        </div>
+                        <p class="text-gray-700">Lancement de nouvelles solutions technologiques pour optimiser la gestion logistique de nos clients.</p>
+                    </div>
+                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
+                        <span class="font-bold">4</span>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary">2025 - Excellence</h3>
+                        </div>
+                        <p class="text-gray-700">Consolidation de notre position comme leader régional dans notre secteur avec des projets ambitieux pour l'avenir.</p>
+                    </div>
+                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
+                        <span class="font-bold">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Milestones Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos Réalisations</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Quelques chiffres clés qui témoignent de notre croissance</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="milestone-card bg-gray-50 p-6 rounded-lg text-center transition duration-300 slide-up">
+                    <div class="text-4xl font-bold text-primary mb-2">50+</div>
+                    <p class="text-gray-700">Clients satisfaits</p>
+                </div>
+                
+                <div class="milestone-card bg-gray-50 p-6 rounded-lg text-center transition duration-300 slide-up">
+                    <div class="text-4xl font-bold text-primary mb-2">30+</div>
+                    <p class="text-gray-700">Partenariats stratégiques</p>
+                </div>
+                
+                <div class="milestone-card bg-gray-50 p-6 rounded-lg text-center transition duration-300 slide-up">
+                    <div class="text-4xl font-bold text-primary mb-2">100+</div>
+                    <p class="text-gray-700">Projets réalisés</p>
+                </div>
+                
+                <div class="milestone-card bg-gray-50 p-6 rounded-lg text-center transition duration-300 slide-up">
+                    <div class="text-4xl font-bold text-primary mb-2">15+</div>
+                    <p class="text-gray-700">Secteurs d'intervention</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Preview Section -->
+    <section id="equipe" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Notre Équipe</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Une équipe jeune, dynamique, compétente et engagée dans l'excellence</p>
+            </div>
+            
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="img/24.jpg" alt="Directeur Général" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">Doris Kayenga N.</h3>
+                        <p class="text-secondary font-medium mb-3">Directeur Général</p>
+                        <p class="text-gray-700 text-sm">20 ans d'expérience dans le management et la stratégie d'entreprise. Passionné par l'innovation et le développement durable.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="logo/1.png" alt="Responsable Communication" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">Sarah K.</h3>
+                        <p class="text-secondary font-medium mb-3">Responsable Communication</p>
+                        <p class="text-gray-700 text-sm">Spécialiste en stratégie digitale et gestion de marque. Créative et orientée résultats avec une approche data-driven.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="logo/1.png" alt="Responsable Logistique" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">David L.</h3>
+                        <p class="text-secondary font-medium mb-3">Responsable Logistique</p>
+                        <p class="text-gray-700 text-sm">Expert en optimisation des flux et gestion des ressources. Garant de la qualité de nos services opérationnels.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="logo/1.png" alt="Chef de Projet" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">Fatou D.</h3>
+                        <p class="text-secondary font-medium mb-3">Chef de Projet</p>
+                        <p class="text-gray-700 text-sm">Gestionnaire de projets complexes avec une approche méthodique et un souci constant de satisfaction client.</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="text-center mt-12">
+                <a href="equipe.html" class="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition-all duration-300 btn-glow">
+                    <span class="relative z-10">Voir toute l'équipe</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 slide-up">Prêt à collaborer avec nous ?</h2>
+            <p class="text-xl mb-10 max-w-3xl mx-auto slide-up">Notre équipe est à votre disposition pour discuter de vos besoins et vous proposer des solutions sur mesure.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 slide-up">
+                <a href="contact.html" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 btn-pulse">
+                    Nous contacter
+                </a>
+                <a href="services.html" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                    Découvrir nos services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <p class="mb-4">Entreprise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-accent transition">Accueil</a></li>
+                        <li><a href="histoire.html" class="hover:text-accent transition">Notre Histoire</a></li>
+                        <li><a href="services.html" class="hover:text-accent transition">Services</a></li>
+                        <li><a href="produits.html" class="hover:text-accent transition">Produits</a></li>
+                        <li><a href="contact.html" class="hover:text-accent transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="hover:text-accent transition">Solutions logistiques</a></li>
+                        <li><a href="services.html" class="hover:text-accent transition">Fourniture de matériel</a></li>
+                        <li><a href="services.html" class="hover:text-accent transition">Gestion de projets</a></li>
+                        <li><a href="services.html" class="hover:text-accent transition">Consultation stratégique</a></li>
+                        <li><a href="services.html" class="hover:text-accent transition">Support opérationnel</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-secondary hover:bg-red-700 px-4 py-2 rounded-r-md transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 HBG Internationale. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-accent transition">Mentions légales</a>
+                    <a href="#" class="hover:text-accent transition">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-accent transition">Conditions générales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.querySelector('.navbar-menu');
+        const closeButton = document.querySelector('.navbar-close');
+        const backdrop = document.querySelector('.navbar-backdrop');
+        
+        burger.addEventListener('click', () => {
+            menu.classList.remove('hidden');
+        });
+        
+        closeButton.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+        
+        backdrop.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.slide-up, .fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

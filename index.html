@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBG - Excellence au service du progrès</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes bounceIn {
+            0% { 
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .animate-bounce-in {
+            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        
+        :root {
+            --primary: #002580;
+            --secondary: #fb0709;
+            --accent: #2178f9;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .text-secondary {
+            color: var(--secondary);
+        }
+        
+        .bg-accent {
+            background-color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: url('img/18.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            animation: framePulse 4s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 37, 128, 0.2) 0%, rgba(251, 7, 9, 0.2) 100%);
+            mix-blend-mode: overlay;
+            z-index: 0;
+        }
+
+        @keyframes framePulse {
+            0% {
+                transform: scale(0.98);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            100% {
+                transform: scale(1.02);
+                border-color: rgba(255, 255, 255, 0.6);
+            }
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .value-card:hover .value-icon {
+            transform: rotateY(180deg);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* New animation for about image */
+        .about-img-animation {
+            animation: floatAndFade 6s ease-in-out infinite alternate;
+            transform-origin: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        @keyframes floatAndFade {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-10px) rotate(0.5deg);
+                opacity: 0.95;
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* New button animations */
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(251, 7, 9, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(251, 7, 9, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(251, 7, 9, 0);
+            }
+        }
+
+        .btn-slide {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: none;
+        }
+
+        .btn-slide:hover::after {
+            left: 100%;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile submenu hover effect */
+        .navbar-menu .group:hover .group-hover\:block {
+            display: block;
+        }
+        
+        .navbar-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* Partners Animation */
+        .partners-slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .partners-track {
+            display: flex;
+            gap: 4rem;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .partner-logo {
+            flex-shrink: 0;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            transform: translateY(-5px) scale(1.05);
+            opacity: 0.8;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 6 - 4rem * 5)); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Screenflash Animation -->
+    <div id="screenflash" class="fixed inset-0 bg-primary flex items-center justify-center z-50 transition-opacity duration-1000">
+        <div class="logo-animation">
+            <img src="logo/1.png" alt="Logo HBG" class="h-48 md:h-56 animate-bounce-in">
+        </div>
+    </div>
+
+    <!-- WhatsApp Chatbot -->
+    <div id="whatsapp-chatbot" class="fixed bottom-8 right-8 z-50">
+        <div id="chatbot-container" class="hidden w-72 bg-white rounded-lg shadow-xl overflow-hidden">
+            <div class="bg-green-500 text-white p-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fab fa-whatsapp text-2xl mr-2"></i>
+                    <h3 class="font-bold">Chat WhatsApp</h3>
+                </div>
+                <button id="close-chatbot" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 bg-gray-50 h-64 overflow-y-auto">
+                <div class="mb-4 text-center">
+                    <p class="text-gray-700">Bonjour! Comment pouvons-nous vous aider?</p>
+                </div>
+                <div class="flex justify-end mb-4">
+                    <div class="bg-green-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-gray-800">Je souhaite discuter avec un conseiller</p>
+                    </div>
+                </div>
+                <div class="flex justify-start mb-4">
+                    <div class="bg-gray-200 rounded-lg p-3 max-w-xs">
+                        <p class="text-gray-800">Cliquez sur le bouton ci-dessous pour démarrer la conversation sur WhatsApp</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200">
+                <a href="https://wa.me/243810644455" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-2 px-4 rounded transition duration-300">
+                    <i class="fab fa-whatsapp mr-2"></i> Ouvrir WhatsApp
+                </a>
+            </div>
+        </div>
+        <button id="open-chatbot" class="bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-green-600 transition-all floating">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Screenflash animation
+            const screenflash = document.getElementById('screenflash');
+            setTimeout(() => {
+                screenflash.style.opacity = '0';
+                setTimeout(() => {
+                    screenflash.style.display = 'none';
+                }, 1000);
+            }, 2000);
+            
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const openButton = document.getElementById('open-chatbot');
+            const closeButton = document.getElementById('close-chatbot');
+
+            openButton.addEventListener('click', function() {
+                chatbotContainer.classList.toggle('hidden');
+            });
+
+            closeButton.addEventListener('click', function() {
+                chatbotContainer.classList.add('hidden');
+            });
+
+            // Auto-open after 10 seconds if not interacted with
+            setTimeout(() => {
+                if (!localStorage.getItem('chatbotShown')) {
+                    chatbotContainer.classList.remove('hidden');
+                    localStorage.setItem('chatbotShown', 'true');
+                }
+            }, 10000);
+        });
+    </script>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo RDT" class="h-36 md:h-40 transition-transform hover:scale-105">
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="navbar-burger flex items-center text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-primary">Accueil</a>
+                    <a href="#values" class="nav-link text-gray-700 hover:text-primary">Valeurs</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-primary">Services</a>
+                    <a href="#products" class="nav-link text-gray-700 hover:text-primary">Produits</a>
+                    <div class="relative group">
+                        <button class="nav-link text-gray-700 hover:text-primary flex items-center">
+                            Média
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="images.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Images</a>
+                            <a href="videos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Vidéos</a>
+                        </div>
+                    </div>
+                    <a href="#team" class="nav-link text-gray-700 hover:text-primary">Équipe</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+                    <a href="#contact" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 btn-slide">
+                        <span class="relative z-10">Devis</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="navbar-menu hidden relative z-50">
+            <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+            <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+                <div class="flex items-center mb-8">
+                    <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <button class="navbar-close">
+                        <svg class="h-6 w-6 text-gray-500 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="#home">Accueil</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#values">Valeurs</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#products">Produits</a>
+                        </li>
+                        <li class="mb-1 relative group">
+                            <a href="#" class="flex items-center justify-between w-full p-4 text-sm font-semibold text-gray-700 nav-link">
+                                Média
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <ul class="absolute left-0 w-full bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                                <li>
+                                    <a href="images.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Images</a>
+                                </li>
+                                <li>
+                                    <a href="videos.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Vidéos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#team">Équipe</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <div class="pt-6">
+                        <a class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-primary hover:bg-opacity-90 text-white rounded" href="#contact">Demander un devis</a>
+                    </div>
+                    <p class="my-4 text-xs text-center text-gray-500">
+                        <span>© 2025 HBG Internationale</span>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="flex flex-col md:flex-row">
+        <!-- Image Block -->
+        <div class="w-full md:w-1/2 hero h-96 md:h-auto fade-in relative">
+            <div class="absolute inset-0 flex items-center justify-center z-10">
+                <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 md:p-8 max-w-md mx-4 text-center transform transition-all duration-500 hover:scale-105">
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2">HBG Internationale</h3>
+                    <p class="text-white text-sm md:text-base">L'excellence au service de votre entreprise</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Block -->
+        <div class="w-full md:w-1/2 bg-primary text-white py-20 md:py-32 px-6 flex items-center fade-in">
+            <div class="max-w-2xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-up">L'excellence au service du progrès</h1>
+                <p class="text-xl md:text-2xl mb-10 slide-up">Notre équipe passionnée et créative travaille main dans la main avec nos clients pour développer des solutions sur mesure qui captivent et engagent.</p>
+                <div class="flex flex-col sm:flex-row gap-4 slide-up">
+                    <a href="#contact" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 btn-pulse">
+                        Nous contacter
+                    </a>
+                    <a href="#contact" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 relative overflow-hidden group">
+                        <span class="relative z-10">Demander un devis</span>
+                        <span class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-full"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 slide-up">
+                    <h2 class="text-3xl font-bold text-primary mb-6">Notre entreprise</h2>
+                    <p class="text-gray-700 mb-6">HBG Internationale est une entreprise congolaise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
+                    <p class="text-gray-700 mb-6">Grâce à une expertise multisectorielle, nous transformons les ambitions de nos clients en résultats mesurables. Notre approche collaborative nous permet de comprendre vos besoins spécifiques et de fournir des solutions adaptées.</p>
+                    <p class="text-gray-700">Que vous soyez une entreprise, une ONG ou un particulier, notre équipe dévouée est prête à vous accompagner dans la réalisation de vos projets avec professionnalisme et créativité.</p>
+                </div>
+                <div class="md:w-1/2 slide-up">
+                    <div class="relative">
+                        <img src="img/17.jpg" alt="Notre équipe" class="rounded-lg w-full h-auto md:h-full about-img-animation">
+                        <div class="absolute -bottom-6 -right-6 bg-accent text-white p-6 rounded-lg shadow-lg">
+                            <p class="text-xl font-bold">10+</p>
+                            <p class="text-sm">Années d'expérience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos valeurs fondamentales</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Les principes qui guident chacune de nos actions et décisions</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Value 1 -->
+                <div class="value-card bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 slide-up">
+                    <div class="value-icon bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition duration-500">
+                        <i class="fas fa-hand-holding-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Intégrité</h3>
+                    <p class="text-gray-700">Honnêteté et transparence dans toutes nos relations et transactions.</p>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="value-card bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 slide-up">
+                    <div class="value-icon bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition duration-500">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Innovation</h3>
+                    <p class="text-gray-700">Idées nouvelles et adaptation constante aux besoins changeants.</p>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="value-card bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 slide-up">
+                    <div class="value-icon bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition duration-500">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Collaboration</h3>
+                    <p class="text-gray-700">Esprit d'équipe et valorisation de la diversité des compétences.</p>
+                </div>
+                
+                <!-- Value 4 -->
+                <div class="value-card bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 slide-up">
+                    <div class="value-icon bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition duration-500">
+                        <i class="fas fa-globe-africa text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Responsabilité sociale</h3>
+                    <p class="text-gray-700">Engagement éthique et respect de l'environnement dans nos activités.</p>
+                </div>
+                
+                <!-- Value 5 -->
+                <div class="value-card bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300 slide-up">
+                    <div class="value-icon bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition duration-500">
+                        <i class="fas fa-trophy text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Excellence</h3>
+                    <p class="text-gray-700">Recherche constante de la qualité et de la performance optimale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos services</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">HBG fournit une gamme étendue de services pour particuliers, ONG et entreprises</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Femmes ménagères</h3>
+                    <p class="text-gray-700">Service de ménage professionnel pour particuliers et entreprises.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Protocoles & Hôtes d'accueil</h3>
+                    <p class="text-gray-700">Personnel qualifié pour l'accueil et le protocole lors d'événements.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Caméramans & Photographes</h3>
+                    <p class="text-gray-700">Couverture professionnelle de vos événements et besoins médiatiques.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Communication numérique & Web</h3>
+                    <p class="text-gray-700">Stratégie digitale, gestion des réseaux sociaux et développement web.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Conducteurs & Mécaniciens</h3>
+                    <p class="text-gray-700">Personnel qualifié pour la conduite et l'entretien de véhicules.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Traiteurs professionnels</h3>
+                    <p class="text-gray-700">Service de restauration pour vos événements et réunions.</p>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Pharmacies et boutiques partenaires</h3>
+                    <p class="text-gray-700">Réseau de pharmacies et boutiques fiables pour vos besoins.</p>
+                </div>
+                
+                <!-- Service 8 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Assistants juridiques</h3>
+                    <p class="text-gray-700">Support pour vos démarches et procédures légales.</p>
+                </div>
+                
+                <!-- More services would follow the same pattern -->
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="showMoreServices" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition">Voir plus de services</button>
+            </div>
+            
+            <!-- Hidden services -->
+            <div id="moreServices" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8">
+                <!-- Additional services would be displayed here when "Voir plus" is clicked -->
+                <!-- Service 9 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Dénonciation d'anti-valeurs</h3>
+                    <p class="text-gray-700">Service citoyen pour signaler les comportements contraires à l'éthique.</p>
+                </div>
+                
+                <!-- Service 10 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Jardinage & entretien d'espaces verts</h3>
+                    <p class="text-gray-700">Aménagement et entretien professionnel de vos espaces verts.</p>
+                </div>
+                
+                <!-- Service 11 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Informaticiens</h3>
+                    <p class="text-gray-700">Maintenance informatique et développement de solutions digitales.</p>
+                </div>
+                
+                <!-- Service 12 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Forage & plomberie</h3>
+                    <p class="text-gray-700">Solutions professionnelles pour vos besoins en eau et installations sanitaires.</p>
+                </div>
+                
+                <!-- Service 13 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Agents marketing de terrain</h3>
+                    <p class="text-gray-700">Promotion de vos produits et services par des professionnels expérimentés.</p>
+                </div>
+                
+                <!-- Service 14 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Peintres et décorateurs</h3>
+                    <p class="text-gray-700">Amélioration esthétique de vos espaces de travail et d'habitation.</p>
+                </div>
+                
+                <!-- Service 15 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Facilitation de passeports</h3>
+                    <p class="text-gray-700">Assistance pour l'obtention de documents de voyage officiels.</p>
+                </div>
+                
+                <!-- Service 16 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Infographie & design visuel</h3>
+                    <p class="text-gray-700">Création de supports visuels professionnels pour votre communication.</p>
+                </div>
+                
+                <!-- Service 17 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Maintenance des bureaux</h3>
+                    <p class="text-gray-700">Entretien régulier de vos espaces de travail pour un environnement optimal.</p>
+                </div>
+                
+                <!-- Service 18 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Recrutement de main-d'œuvre qualifiée</h3>
+                    <p class="text-gray-700">Sélection et mise à disposition de personnel compétent pour vos besoins.</p>
+                </div>
+
+                <!-- Service 19 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Agents de sécurité</h3>
+                    <p class="text-gray-700">Personnel qualifié pour assurer la protection de vos biens et personnes.</p>
+                </div>
+
+                <!-- Service 20 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Formateurs professionnels</h3>
+                    <p class="text-gray-700">Experts pour former votre personnel dans divers domaines spécialisés.</p>
+                </div>
+
+                <!-- Service 21 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Blanchisserie professionnelle</h3>
+                    <p class="text-gray-700">Service complet de nettoyage et entretien de textiles pour entreprises.</p>
+                </div>
+
+                <!-- Service 22 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Traducteurs & interprètes</h3>
+                    <p class="text-gray-700">Professionnels pour vos besoins en traduction et interprétation multilingue.</p>
+                </div>
+
+                <!-- Service 23 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Contrôle qualité</h3>
+                    <p class="text-gray-700">Audit et amélioration des processus pour garantir l'excellence opérationnelle.</p>
+                </div>
+
+                <!-- Service 24 -->
+                <div class="service-card bg-gray-50 p-6 rounded-lg transition duration-300 hover:border-accent border border-gray-200">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Gestion d'entrepôt</h3>
+                    <p class="text-gray-700">Solutions complètes pour l'organisation et la gestion de vos stocks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos produits</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Solutions complètes pour votre stratégie de marque et communication</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <div class="text-accent text-4xl mb-6">
+                        <i class="fas fa-chess-queen"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Stratégie de marque</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Création de logo et identité visuelle</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Développement de charte graphique</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Élaboration de message clé et positionnement</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <div class="text-accent text-4xl mb-6">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Gestion des médias sociaux</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Création et optimisation de profils</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Animation quotidienne des réseaux</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Stratégie d'interaction et community management</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <div class="text-accent text-4xl mb-6">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Création de contenu</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Production vidéo professionnelle</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Conception de visuels impactants</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Rédaction de contenus et publicité ciblée</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Advanced Features -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-primary mb-8 text-center">Fonctionnalités avancées</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 slide-up">
+                        <div class="flex items-start">
+                            <div class="text-accent text-3xl mr-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-primary mb-3">Analyse de données</h4>
+                                <p class="text-gray-700">Tableaux de bord interactifs et rapports détaillés pour piloter vos campagnes avec précision. Suivi en temps réel des performances et recommandations stratégiques.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 slide-up">
+                        <div class="flex items-start">
+                            <div class="text-accent text-3xl mr-4">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-primary mb-3">Automatisation marketing</h4>
+                                <p class="text-gray-700">Campagnes e-mail personnalisées, ciblage intelligent des audiences et publicité automatisée pour maximiser votre retour sur investissement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Témoignages clients</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Ce que nos clients disent de notre travail</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 slide-up">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"HBG a transformé notre présence en ligne avec une stratégie de marque cohérente et des visuels percutants. Leur équipe est réactive et professionnelle."</p>
+                    <div class="flex items-center">
+                        <img src="logo/1.png"Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-primary">Marie K.</h4>
+                            <p class="text-gray-600 text-sm">Directrice Marketing, Entreprise X</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 slide-up">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Le service de recrutement de HBG nous a fait gagner un temps précieux. Ils ont compris nos besoins et fourni des candidats parfaitement adaptés."</p>
+                    <div class="flex items-center">
+                        <img src="logo/1.png" alt="Client" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-primary">Jean-Paul D.</h4>
+                            <p class="text-gray-600 text-sm">DRH, Société Y</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 slide-up">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Les femmes de ménage recommandées par HBG sont sérieuses et efficaces. Nous avons renouvelé notre contrat pour la troisième année consécutive."</p>
+                    <div class="flex items-center">
+                        <img src="logo/1.png" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-primary">Amina B.</h4>
+                            <p class="text-gray-600 text-sm">Particulier</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Notre équipe</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Une équipe jeune, dynamique, compétente et engagée dans l'excellence</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="img/24.jpg" alt="Directeur Général" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">Doris Kayenga N.</h3>
+                        <p class="text-secondary font-medium mb-3">Directeur Général</p>
+                        <p class="text-gray-700 text-sm">20 ans d'expérience dans le management et la stratégie d'entreprise. Passionné par l'innovation et le développement durable.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="logo/1.png" alt="Responsable Communication" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">Sarah K.</h3>
+                        <p class="text-secondary font-medium mb-3">Responsable Communication</p>
+                        <p class="text-gray-700 text-sm">Spécialiste en stratégie digitale et gestion de marque. Créative et orientée résultats avec une approche data-driven.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="logo/1.png" alt="Responsable Logistique" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">David L.</h3>
+                        <p class="text-secondary font-medium mb-3">Responsable Logistique</p>
+                        <p class="text-gray-700 text-sm">Expert en optimisation des flux et gestion des ressources. Garant de la qualité de nos services opérationnels.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 slide-up">
+                    <img src="logo/1.png" alt="Chef de Projet" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-1">Fatou D.</h3>
+                        <p class="text-secondary font-medium mb-3">Chef de Projet</p>
+                        <p class="text-gray-700 text-sm">Gestionnaire de projets complexes avec une approche méthodique et un souci constant de satisfaction client.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-700 max-w-2xl mx-auto">Notre équipe compte plus de 50 collaborateurs qualifiés répartis dans différents départements, tous engagés à fournir un service d'excellence à nos clients.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Contactez-nous</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Nous sommes à votre disposition pour répondre à toutes vos questions</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md slide-up">
+                    <h3 class="text-xl font-bold text-primary mb-6">Envoyez-nous un message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nom complet</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Sujet</label>
+                            <select id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                                <option value="service">Demande de service</option>
+                                <option value="quote">Demande de devis</option>
+                                <option value="info">Demande d'information</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition w-full">Envoyer le message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="slide-up">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md mb-8">
+                        <h3 class="text-xl font-bold text-primary mb-6">Coordonnées</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="text-accent text-xl mr-4 mt-1">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Téléphone</h4>
+                                    <p class="text-gray-700">+243 998 559 939</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="text-accent text-xl mr-4 mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Email</h4>
+                                    <p class="text-gray-700">hewaborainternationale@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="text-accent text-xl mr-4 mt-1">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Heures d'ouverture</h4>
+                                    <p class="text-gray-700">Lundi - Vendredi: 8h00 - 17h00</p>
+                                    <p class="text-gray-700">Samedi: 9h00 - 13h00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map -->
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-primary mb-6">Localisation</h3>
+                        <div class="aspect-w-16 aspect-h-9">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.717253350012!2d15.28041541476258!3d-4.32262999699335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a6a3139e1527a0f%3A0x5d5a1b6d5b1b6d5b!2sKinshasa%2C%20Democratic%20Republic%20of%20the%20Congo!5e0!3m2!1sen!2sus!4v1623250000000!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 slide-up">
+                    <h2 class="text-3xl font-bold text-primary mb-6">Téléchargez notre application</h2>
+                    <p class="text-gray-700 mb-6">Ne ratez plus aucune activité ni offre exclusive en téléchargeant notre application mobile. Disponible sur iOS et Android.</p>
+                    <p class="text-gray-700 mb-8">Restez connecté avec HBG Internationale où que vous soyez et bénéficiez de fonctionnalités exclusives :</p>
+                    <ul class="space-y-3 text-gray-700 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Notifications instantanées sur nos offres</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Accès à nos services en un clic</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                            <span>Suivi de vos demandes en temps réel</span>
+                        </li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="bg-black text-white px-6 py-3 rounded-lg flex items-center justify-center hover:bg-gray-800 transition">
+                            <i class="fab fa-apple text-2xl mr-2"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Télécharger sur</div>
+                                <div class="font-bold">App Store</div>
+                            </div>
+                        </a>
+                        <a href="#" class="bg-black text-white px-6 py-3 rounded-lg flex items-center justify-center hover:bg-gray-800 transition">
+                            <i class="fab fa-google-play text-2xl mr-2"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Disponible sur</div>
+                                <div class="font-bold">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 slide-up">
+                    <img src="img/mockup2.png" alt="Application mobile HBG" class="rounded-lg w-full h-auto max-w-md mx-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos Partenaires</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Nous collaborons avec des entreprises de confiance</p>
+            </div>
+            
+            <div class="partners-slider">
+                <div class="partners-track">
+                    <div class="partner-logo">
+                        <img src="logo/1.png" alt="Partner 1" class="h-20 object-contain">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/1.png" alt="Partner 2" class="h-20 object-contain">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/1.png" alt="Partner 3" class="h-20 object-contain">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/1.png" alt="Partner 4" class="h-20 object-contain">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/1.png" alt="Partner 5" class="h-20 object-contain">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo/1.png" alt="Partner 6" class="h-20 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                   <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <p class="mb-4">Entreprise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-accent transition">Accueil</a></li>
+                        <li><a href="#services" class="hover:text-accent transition">Services</a></li>
+                        <li><a href="#products" class="hover:text-accent transition">Produits</a></li>
+                        <li><a href="#team" class="hover:text-accent transition">Équipe</a></li>
+                        <li><a href="#contact" class="hover:text-accent transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-accent transition">Communication numérique</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Recrutement</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Services ménagers</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Infographie</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Logistique</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-secondary hover:bg-red-700 px-4 py-2 rounded-r-md transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 HBG Internationale. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-accent transition">Mentions légales</a>
+                    <a href="#" class="hover:text-accent transition">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-accent transition">Conditions générales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.querySelector('.navbar-menu');
+        const closeButton = document.querySelector('.navbar-close');
+        const backdrop = document.querySelector('.navbar-backdrop');
+        
+        burger.addEventListener('click', () => {
+            menu.classList.remove('hidden');
+        });
+        
+        closeButton.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+        
+        backdrop.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+        
+        // Show more services
+        const showMoreBtn = document.getElementById('showMoreServices');
+        const moreServices = document.getElementById('moreServices');
+        
+        showMoreBtn.addEventListener('click', () => {
+            moreServices.classList.toggle('hidden');
+            showMoreBtn.textContent = moreServices.classList.contains('hidden') ? 'Voir plus de services' : 'Voir moins';
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to a server
+            alert('Merci pour votre message! Nous vous contacterons bientôt.');
+            contactForm.reset();
+        });
+        
+        // Pause animation on hover
+        const partnersTrack = document.querySelector('.partners-track');
+        partnersTrack.addEventListener('mouseenter', () => {
+            partnersTrack.style.animationPlayState = 'paused';
+        });
+        partnersTrack.addEventListener('mouseleave', () => {
+            partnersTrack.style.animationPlayState = 'running';
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.slide-up, .fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

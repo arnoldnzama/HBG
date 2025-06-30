@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBG - Galerie d'images de nos services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .animate-bounce-in {
+            animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        
+        :root {
+            --primary: #002580;
+            --secondary: #fb0709;
+            --accent: #2178f9;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .text-secondary {
+            color: var(--secondary);
+        }
+        
+        .bg-accent {
+            background-color: var(--accent);
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 37, 128, 0.8), rgba(0, 37, 128, 0.8)), url('img/18.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .value-card:hover .value-icon {
+            transform: rotateY(180deg);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gallery styles */
+        .gallery-item {
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 37, 128, 0.8);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Modal styles */
+        .modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        /* Filter buttons */
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Animation for gallery items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .gallery-animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        /* Floating animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo RDT" class="h-36 md:h-40 transition-transform hover:scale-105">
+                    </a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="navbar-burger flex items-center text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-primary">Accueil</a>
+                    <a href="index.html#values" class="nav-link text-gray-700 hover:text-primary">Valeurs</a>
+                    <a href="index.html#services" class="nav-link text-gray-700 hover:text-primary">Services</a>
+                    <a href="index.html#products" class="nav-link text-gray-700 hover:text-primary">Produits</a>
+                    <div class="relative group">
+                        <button class="nav-link text-gray-700 hover:text-primary flex items-center">
+                            Média
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="images.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Images</a>
+                            <a href="videos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Vidéos</a>
+                        </div>
+                    </div>
+                    <a href="index.html#team" class="nav-link text-gray-700 hover:text-primary">Équipe</a>
+                    <a href="index.html#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
+                    <a href="index.html#contact" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition">Devis</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="navbar-menu hidden relative z-50">
+            <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+            <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+                <div class="flex items-center mb-8">
+                    <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <button class="navbar-close">
+                        <svg class="h-6 w-6 text-gray-500 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="index.html">Accueil</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="index.html#values">Valeurs</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="index.html#services">Services</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="index.html#products">Produits</a>
+                        </li>
+                        <li class="mb-1 relative group">
+                            <a href="#" class="flex items-center justify-between w-full p-4 text-sm font-semibold text-gray-700 nav-link">
+                                Média
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <ul class="absolute left-0 w-full bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                                <li>
+                                    <a href="images.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Images</a>
+                                </li>
+                                <li>
+                                    <a href="videos.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Vidéos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="index.html#team">Équipe</a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="index.html#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <div class="pt-6">
+                        <a class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-primary hover:bg-opacity-90 text-white rounded" href="index.html#contact">Demander un devis</a>
+                    </div>
+                    <p class="my-4 text-xs text-center text-gray-500">
+                        <span>© 2025 HBG Internationale</span>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+   
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold text-primary mb-4">Nos réalisations en images</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Explorez notre travail à travers ces clichés qui illustrent la qualité de nos services</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="all">Tous</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="menage">Femmes ménagères</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="protocol">Protocole</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="photo">Photographie</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="logistique">Logistique</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" data-filter="equipe">Notre équipe</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Image 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="menage">
+                    <img src="img/17.jpg" alt="Service de ménage professionnel" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Service de ménage</h3>
+                        <p class="text-sm">Professionnalisme et efficacité pour un environnement impeccable</p>
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="protocol">
+                    <img src="img/18.jpg" alt="Service de protocole" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Service de protocole</h3>
+                        <p class="text-sm">Accueil et organisation d'événements avec élégance</p>
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="photo">
+                    <img src="img/19.jpg" alt="Service photographique" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Service photographique</h3>
+                        <p class="text-sm">Capturer les moments importants avec professionnalisme</p>
+                    </div>
+                </div>
+
+                <!-- Image 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="logistique">
+                    <img src="img/20.jpg" alt="Service logistique" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Service logistique</h3>
+                        <p class="text-sm">Organisation et gestion des flux avec précision</p>
+                    </div>
+                </div>
+
+                <!-- Image 5 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="equipe">
+                    <img src="img/21.jpg" alt="Notre équipe" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Notre équipe</h3>
+                        <p class="text-sm">Professionnels dévoués à votre service</p>
+                    </div>
+                </div>
+
+                <!-- Image 6 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="menage">
+                    <img src="img/22.jpg" alt="Formation ménage" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Formation ménage</h3>
+                        <p class="text-sm">Nos équipes suivent des formations régulières</p>
+                    </div>
+                </div>
+
+                <!-- Image 7 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="protocol">
+                    <img src="img/23.jpg" alt="Événement protocolaire" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Événement protocolaire</h3>
+                        <p class="text-sm">Organisation d'événements d'entreprise</p>
+                    </div>
+                </div>
+
+                <!-- Image 8 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="photo">
+                    <img src="img/24.jpg" alt="Reportage photo" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Reportage photo</h3>
+                        <p class="text-sm">Couverture médiatique d'événements</p>
+                    </div>
+                </div>
+
+                <!-- Image 9 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="logistique">
+                    <img src="img/25.jpg" alt="Gestion de stock" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Gestion de stock</h3>
+                        <p class="text-sm">Organisation et inventaire des marchandises</p>
+                    </div>
+                </div>
+
+                <!-- Image 10 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="equipe">
+                    <img src="img/26.jpg" alt="Réunion d'équipe" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Réunion d'équipe</h3>
+                        <p class="text-sm">Collaboration et partage des bonnes pratiques</p>
+                    </div>
+                </div>
+
+                <!-- Image 11 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="menage">
+                    <img src="img/27.jpg" alt="Matériel professionnel" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Matériel professionnel</h3>
+                        <p class="text-sm">Équipements de qualité pour un résultat optimal</p>
+                    </div>
+                </div>
+
+                <!-- Image 12 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md relative h-64 gallery-animate" data-category="protocol">
+                    <img src="img/28.jpg" alt="Accueil personnalisé" class="w-full h-full object-cover">
+                    <div class="gallery-caption">
+                        <h3 class="font-bold">Accueil personnalisé</h3>
+                        <p class="text-sm">Service sur mesure pour vos invités</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button id="loadMore" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition">Charger plus d'images</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+        <div class="modal-content bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-auto relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-gray-700 hover:text-primary text-3xl z-50">
+                &times;
+            </button>
+            <div class="p-4">
+                <img id="modalImage" src="" alt="" class="w-full h-auto rounded-lg">
+                <div class="mt-4">
+                    <h3 id="modalTitle" class="text-xl font-bold text-primary"></h3>
+                    <p id="modalDescription" class="text-gray-700 mt-2"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Intéressé par nos services?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Nos images vous ont convaincu? Contactez-nous pour discuter de votre projet.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="index.html#contact" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">Nous contacter</a>
+                <a href="index.html#contact" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition duration-300">Demander un devis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                   <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <p class="mb-4">Entreprise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-accent transition">Accueil</a></li>
+                        <li><a href="index.html#services" class="hover:text-accent transition">Services</a></li>
+                        <li><a href="index.html#products" class="hover:text-accent transition">Produits</a></li>
+                        <li><a href="images.html" class="hover:text-accent transition">Galerie</a></li>
+                        <li><a href="index.html#contact" class="hover:text-accent transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-accent transition">Communication numérique</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Recrutement</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Services ménagers</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Infographie</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Logistique</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-secondary hover:bg-red-700 px-4 py-2 rounded-r-md transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 HBG Internationale. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-accent transition">Mentions légales</a>
+                    <a href="#" class="hover:text-accent transition">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-accent transition">Conditions générales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.querySelector('.navbar-menu');
+        const closeButton = document.querySelector('.navbar-close');
+        const backdrop = document.querySelector('.navbar-backdrop');
+        
+        burger.addEventListener('click', () => {
+            menu.classList.remove('hidden');
+        });
+        
+        closeButton.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+        
+        backdrop.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+        
+        // WhatsApp Chatbot
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const openButton = document.getElementById('open-chatbot');
+        const closeButtonChat = document.getElementById('close-chatbot');
+        
+        openButton.addEventListener('click', function() {
+            chatbotContainer.classList.toggle('hidden');
+        });
+        
+        closeButtonChat.addEventListener('click', function() {
+            chatbotContainer.classList.add('hidden');
+        });
+        
+        // Auto-open after 10 seconds if not interacted with
+        setTimeout(() => {
+            if (!localStorage.getItem('chatbotShown')) {
+                chatbotContainer.classList.remove('hidden');
+                localStorage.setItem('chatbotShown', 'true');
+            }
+        }, 10000);
+        
+        // Gallery functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const loadMoreBtn = document.getElementById('loadMore');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeModal = document.getElementById('closeModal');
+        
+        // Filter gallery items
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filter = button.dataset.filter;
+                
+                // Filter items
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        item.classList.add('gallery-animate');
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Load more images (simulated)
+        loadMoreBtn.addEventListener('click', () => {
+            // In a real scenario, you would fetch more images from a server
+            // Here we'll just simulate by showing an alert
+            alert('Plus d\'images seront chargées depuis notre base de données. Cette fonctionnalité est en cours de développement.');
+        });
+        
+        // Image modal functionality
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                const title = item.querySelector('h3').textContent;
+                const description = item.querySelector('p').textContent;
+                
+                modalImage.src = imgSrc;
+                modalImage.alt = title;
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.slide-up, .fade-in, .gallery-animate').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
