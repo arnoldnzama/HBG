@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBG - Offres d'emploi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet
+     <style>
+        :root {
+            --primary: #002580;
+            --secondary: #fb0709;
+            --accent: #2178f9;
+        }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .text-secondary { color: var(--secondary); }
+        .bg-accent { background-color: var(--accent); }
+        .text-accent { color: var(--accent); }
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .active-filter {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Trouvez l'emploi de vos rêves</h1>
+                <p class="text-lg mb-8">Parcourez nos offres d'emploi et postulez en quelques clics</p>
+                
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1 relative">
+                            <input type="text" placeholder="Mots-clés, compétences, entreprises" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800">
+                            <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                        </div>
+                        <div class="flex-1 relative">
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 appearance-none">
+                                <option value="">Tous les secteurs</option>
+                                <option value="femmes_menageres">Femmes ménagères</option>
+                                <option value="protocoles_hotes">Protocoles & Hôtes d'accueil</option>
+                                <option value="cameramen_photographes">Caméramans & Photographes</option>
+                                <option value="communication_web">Communication numérique & Web</option>
+                                <option value="conducteurs_mecaniciens">Conducteurs & Mécaniciens</option>
+                                <option value="traiteurs">Traiteurs professionnels</option>
+                                <option value="pharmacies_boutiques">Pharmacies et boutiques partenaires</option>
+                                <option value="assistants_juridiques">Assistants juridiques</option>
+                                <option value="denonciation">Dénonciation d'anti-valeurs</option>
+                                <option value="jardinage">Jardinage & entretien d'espaces verts</option>
+                                <option value="informaticiens">Informaticiens</option>
+                                <option value="forage_plomberie">Forage & plomberie</option>
+                                <option value="marketing_terrain">Agents marketing de terrain</option>
+                                <option value="peintres_decorateurs">Peintres et décorateurs</option>
+                                <option value="facilitation_passeports">Facilitation de passeports</option>
+                                <option value="infographie_design">Infographie & design visuel</option>
+                                <option value="maintenance_bureaux">Maintenance des bureaux</option>
+                                <option value="recrutement_qualifie">Recrutement de main-d'œuvre qualifiée</option>
+                                <option value="agents_securite">Agents de sécurité</option>
+                                <option value="formateurs">Formateurs professionnels</option>
+                                <option value="blanchisserie">Blanchisserie professionnelle</option>
+                                <option value="traducteurs">Traducteurs & interprètes</option>
+                                <option value="controle_qualite">Contrôle qualité</option>
+                                <option value="gestion_entrepot">Gestion d'entrepôt</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
+                        </div>
+                        <button class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Rechercher
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <aside class="lg:w-1/4">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h4 class="font-medium mb-3">Type de contrat</h4>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="contract-filter rounded text-blue-600 mr-2" value="CDI">
+                            <span>CDI</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="contract-filter rounded text-blue-600 mr-2" value="CDD">
+                            <span>CDD</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="contract-filter rounded text-blue-600 mr-2" value="Stage">
+                            <span>Stage</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="contract-filter rounded text-blue-600 mr-2" value="Formation">
+                            <span>Formation</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="contract-filter rounded text-blue-600 mr-2" value="Freelance">
+                            <span>Freelance</span>
+                        </label>
+                    </div>
+                    <button id="apply-filters" class="w-full mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        Appliquer les filtres
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-lg mb-4">Abonnez-vous aux alertes</h3>
+                    <p class="text-sm text-gray-600 mb-4">Recevez les nouvelles offres par email</p>
+                    <input type="email" placeholder="Votre email" class="w-full px-4 py-2 border border-gray-300 rounded mb-3">
+                    <button class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        S'abonner
+                    </button>
+                </div>
+            </aside>
+            
+            <!-- Job Listings -->
+            <div class="lg:w-3/4">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold"><span id="job-count">124</span> offres d'emploi disponibles</h2>
+                    <div class="flex items-center">
+                        <span class="mr-2 text-gray-600">Trier par :</span>
+                        <div class="relative">
+                            <select class="appearance-none bg-white border border-gray-300 rounded px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Pertinence</option>
+                                <option>Date de publication</option>
+                                <option>Salaire</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job Cards -->
+                <div class="space-y-4">
+                    <!-- Job Card 1 -->
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDI">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Développeur Full Stack</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">Orange CI</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">CDI</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Temps plein</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons un développeur Full Stack expérimenté pour rejoindre notre équipe technique. Vous serez responsable du développement et de la maintenance de nos applications web.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">JavaScript</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">React</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Node.js</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 2 jours</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Card 2 -->
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDD">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Responsable Marketing Digital</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">MTN CI</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">CDD</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Temps plein</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons un Responsable Marketing Digital pour piloter nos campagnes digitales et améliorer notre présence en ligne. Vous serez en charge de la stratégie digitale et de son exécution.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Marketing</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">SEO</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Réseaux sociaux</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 5 jours</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Card 3 -->
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDI">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Comptable</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">Ecobank</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">CDI</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Temps plein</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons un comptable expérimenté pour rejoindre notre département financier. Vous serez responsable de la tenue des comptes, des rapports financiers et de la conformité fiscale.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Comptabilité</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Fiscalité</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">IFRS</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 1 semaine</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Card 4 -->
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDI">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Infirmier(ère)</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">CHU de Cocody</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">CDI</span>
+                                        <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded ml-2">Temps partiel</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons un(e) infirmier(ère) pour rejoindre notre équipe médicale. Vous serez responsable des soins aux patients, de l'administration des médicaments et du suivi des dossiers médicaux.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Soins infirmiers</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Urgences</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Pédiatrie</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 3 jours</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Card 5 -->
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDI">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Ingénieur Systèmes</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">Canal+ CI</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">CDI</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Temps plein</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons un Ingénieur Systèmes pour gérer notre infrastructure IT. Vous serez responsable de la maintenance des serveurs, de la sécurité des systèmes et du support technique.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Linux</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Réseaux</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Virtualisation</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié aujourd'hui</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ajout d'offres pour chaque secteur -->
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDI" data-sector="femmes_menageres">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Femme de Ménage</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">CleanHome CI</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">CDI</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Temps plein</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons des femmes de ménage expérimentées pour intervenir chez nos clients particuliers et professionnels.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Entretien</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Organisation</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 1 jour</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="CDD" data-sector="protocoles_hotes">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Hôte(sse) d'Accueil</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">EventPro</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Abidjan</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">CDD</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Événementiel</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Rejoignez notre équipe pour accueillir et orienter les invités lors de nos événements professionnels.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Accueil</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Communication</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 2 jours</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="Freelance" data-sector="cameramen_photographes">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Photographe Événementiel</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">StudioFlash</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Yopougon</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Freelance</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Mission</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Nous recherchons un photographe/cameraman pour couvrir nos événements et réaliser des reportages photo/vidéo.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Photo</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Vidéo</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 3 jours</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="job-card bg-white rounded-lg shadow-md p-6 transition-all duration-300" data-contract="Stage" data-sector="communication_web">
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                                <img src="logo/1.jpg" alt="Company Logo" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-blue-600">Stagiaire Communication Digitale</h3>
+                                        <div class="flex items-center text-gray-600 mt-1">
+                                            <span class="mr-4">WebCom Africa</span>
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Cocody</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 md:mt-0">
+                                        <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Stage</span>
+                                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">Temps partiel</span>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-gray-700">Participez à la gestion de nos réseaux sociaux et à la création de contenus web pour nos clients.</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Réseaux sociaux</span>
+                                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded">Création de contenu</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center">
+                                    <span class="text-sm text-gray-500">Publié il y a 4 jours</span>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Voir l'offre <i class="fas fa-arrow-right ml-1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ajoute d'autres offres similaires pour chaque secteur en adaptant data-sector et le contenu -->
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <nav class="inline-flex rounded-md shadow">
+                        <a href="#" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-blue-600 font-medium">1</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">2</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">3</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">4</a>
+                        <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50">5</a>
+                        <a href="#" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background-color: #002580;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <a href="index.html" class="mr-auto text-2xl font-bold text-primary">
+                        <img src="logo/1.png" alt="Logo HBG" class="h-28 transition-transform hover:scale-105">
+                    </a>
+                    <p class="mb-4">Entreprise de sous-traitance offrant des services variés et des produits liés à la stratégie de marque.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-accent transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-accent transition">Accueil</a></li>
+                        <li><a href="#services" class="hover:text-accent transition">Services</a></li>
+                        <li><a href="#products" class="hover:text-accent transition">Produits</a></li>
+                        <li><a href="#team" class="hover:text-accent transition">Équipe</a></li>
+                        <li><a href="#contact" class="hover:text-accent transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-accent transition">Communication numérique</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Recrutement</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Services ménagers</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Infographie</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Logistique</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos dernières actualités.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-secondary hover:bg-red-700 px-4 py-2 rounded-r-md transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 HBG Internationale. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-accent transition">Mentions légales</a>
+                    <a href="#" class="hover:text-accent transition">Politique de confidentialité</a>
+                    <a href="#" class="hover:text-accent transition">Conditions générales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle (would need proper implementation)
+            const mobileMenuButton = document.querySelector('button.md\\:hidden');
+            
+            // Filter functionality
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            const contractFilters = document.querySelectorAll('.contract-filter');
+            const jobCards = document.querySelectorAll('.job-card');
+            const jobCount = document.getElementById('job-count');
+
+            function filterJobs() {
+                const selectedTypes = Array.from(contractFilters)
+                    .filter(f => f.checked)
+                    .map(f => f.value);
+
+                let visibleCount = 0;
+                jobCards.forEach(card => {
+                    const contractType = card.getAttribute('data-contract');
+                    if (selectedTypes.length === 0 || selectedTypes.includes(contractType)) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                jobCount.textContent = visibleCount;
+            }
+
+            applyFiltersBtn.addEventListener('click', filterJobs);
+
+            // Optionnel : filtrage instantané au clic sur les cases à cocher
+            contractFilters.forEach(cb => cb.addEventListener('change', filterJobs));
+
+            // Initialisation
+            filterJobs();
+        });
+    </script>
+</body>
+</html>
