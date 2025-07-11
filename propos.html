@@ -321,16 +321,9 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="flex flex-col md:flex-row fade-in">
-        <!-- Image Block -->
-        <div class="w-full md:w-1/2 h-96 md:h-auto" 
-             style="background: url('img/hbg.png'); 
-                    background-size: cover; 
-                    background-position: center;">
-        </div>
-        
-        <!-- Text Block -->
-        <div class="w-full md:w-1/2 bg-primary text-white py-20 md:py-32 flex items-center">
+    <section class="flex flex-col fade-in">
+        <!-- Hero Full Text Block -->
+        <div class="w-full bg-primary text-white py-20 md:py-32 flex items-center">
             <div class="container mx-auto px-6">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-up">Notre Histoire</h1>
                 <p class="text-xl md:text-2xl mb-10 max-w-3xl slide-up">Découvrez le parcours qui a façonné HBG et notre engagement envers l'excellence</p>
@@ -362,12 +355,12 @@
                 </div>
                 <div class="md:w-1/2 slide-up">
                     <div class="relative overflow-hidden group">
-                        <img src="img/13.jpg" alt="Notre équipe" 
+                        <img src="img/ekipe.png" alt="Notre équipe" 
                              class="rounded-lg w-full shadow-xl transform transition-all duration-700 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="absolute -bottom-6 -right-6 bg-accent text-white p-6 rounded-lg shadow-lg transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-6">
-                            <p class="text-xl font-bold">2021</p>
-                            <p class="text-sm">Année de création</p>
+                            <p class="text-xl font-bold">HBG</p>
+                            <p class="text-sm">main dans la main avec nos clients</p>
                         </div>
                     </div>
                 </div>
@@ -475,97 +468,82 @@
         </div>
     </section>
 
-    <!-- Timeline Section -->
-    <section class="py-16 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl font-bold text-primary mb-4">Notre Parcours</h2>
-                <p class="text-gray-700 max-w-2xl mx-auto">Les étapes clés de notre développement depuis notre création</p>
+   <!-- Timeline Section -->
+<section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl font-bold text-primary mb-4">Notre Parcours</h2>
+            <p class="text-gray-700 max-w-2xl mx-auto">Les étapes clés de notre développement depuis notre création</p>
+        </div>
+        
+        <div class="relative time">
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary">Fondation</h3>
+                    </div>
+                    <p class="text-gray-700">Création de HBG avec une petite équipe dédiée à fournir des solutions logistiques innovantes aux entreprises locales.</p>
+                </div>
             </div>
             
-            <div class="relative timeline">
-                <!-- Timeline Item 1 -->
-                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
-                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary">2021 - Fondation</h3>
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <p class="text-gray-700">Création de HBG avec une petite équipe dédiée à fournir des solutions logistiques innovantes aux entreprises locales.</p>
+                        <h3 class="text-xl font-bold text-primary">Expansion</h3>
                     </div>
-                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
-                        <span class="font-bold">1</span>
-                    </div>
+                    <p class="text-gray-700">Diversification de nos services et établissement de partenariats stratégiques avec des fournisseurs internationaux.</p>
                 </div>
-                
-                <!-- Timeline Item 2 -->
-                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
-                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary">2022 - Expansion</h3>
+            </div>
+            
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <p class="text-gray-700">Diversification de nos services et établissement de partenariats stratégiques avec des fournisseurs internationaux.</p>
+                        <h3 class="text-xl font-bold text-primary">Reconnaissance</h3>
                     </div>
-                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
-                        <span class="font-bold">2</span>
-                    </div>
+                    <p class="text-gray-700">Croissance de notre clientèle et reconnaissance comme fournisseur fiable par plusieurs institutions et ONG internationales.</p>
                 </div>
-                
-                <!-- Timeline Item 3 -->
-                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
-                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary">2023 - Reconnaissance</h3>
+            </div>
+            
+            <!-- Timeline Item 4 -->
+            <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                            <i class="fas fa-globe"></i>
                         </div>
-                        <p class="text-gray-700">Croissance de notre clientèle et reconnaissance comme fournisseur fiable par plusieurs institutions et ONG internationales.</p>
+                        <h3 class="text-xl font-bold text-primary">Innovation</h3>
                     </div>
-                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
-                        <span class="font-bold">3</span>
-                    </div>
+                    <p class="text-gray-700">Lancement de nouvelles solutions technologiques pour optimiser la gestion logistique de nos clients.</p>
                 </div>
-                
-                <!-- Timeline Item 4 -->
-                <div class="timeline-item mb-8 relative pl-16 md:pl-0 md:even:pl-16 slide-up">
-                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary">2024 - Innovation</h3>
+            </div>
+            
+            <!-- Timeline Item 5 -->
+            <div class="timeline-item relative pl-16 md:pl-0 md:even:pl-16 slide-up">
+                <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
+                            <i class="fas fa-trophy"></i>
                         </div>
-                        <p class="text-gray-700">Lancement de nouvelles solutions technologiques pour optimiser la gestion logistique de nos clients.</p>
+                        <h3 class="text-xl font-bold text-primary">Excellence</h3>
                     </div>
-                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
-                        <span class="font-bold">4</span>
-                    </div>
-                </div>
-                
-                <!-- Timeline Item 5 -->
-                <div class="timeline-item relative pl-16 md:pl-0 md:even:pl-16 slide-up">
-                    <div class="timeline-content bg-white p-8 rounded-lg shadow-md transition duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="timeline-icon bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4 transition duration-500">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-primary">2025 - Excellence</h3>
-                        </div>
-                        <p class="text-gray-700">Consolidation de notre position comme leader régional dans notre secteur avec des projets ambitieux pour l'avenir.</p>
-                    </div>
-                    <div class="absolute top-0 left-0 md:left-1/2 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center z-10">
-                        <span class="font-bold">5</span>
-                    </div>
+                    <p class="text-gray-700">Consolidation de notre position comme leader régional dans notre secteur avec des projets ambitieux pour l'avenir.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Milestones Section -->
     <section class="py-16 bg-white">
@@ -650,11 +628,7 @@
             </div>
             
             
-            <div class="text-center mt-12">
-                <a href="equipe.html" class="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition-all duration-300 btn-glow">
-                    <span class="relative z-10">Voir toute l'équipe</span>
-                </a>
-            </div>
+          
         </div>
     </section>
 
@@ -664,10 +638,10 @@
             <h2 class="text-3xl md:text-4xl font-bold mb-6 slide-up">Prêt à collaborer avec nous ?</h2>
             <p class="text-xl mb-10 max-w-3xl mx-auto slide-up">Notre équipe est à votre disposition pour discuter de vos besoins et vous proposer des solutions sur mesure.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 slide-up">
-                <a href="contact.html" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 btn-pulse">
+                <a href="index.html#contact" class="bg-secondary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 btn-pulse">
                     Nous contacter
                 </a>
-                <a href="services.html" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                <a href="index.html#services" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
                     Découvrir nos services
                 </a>
             </div>

@@ -383,13 +383,23 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="nav-link text-gray-700 hover:text-primary">Accueil</a>
+                    <div class="relative group">
+                        <button class="nav-link text-gray-700 hover:text-primary flex items-center">
+                            Qui sommes-nous ?
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="propos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">A propos de nous</a>
+                        </div>
+                    </div>
                     <a href="#values" class="nav-link text-gray-700 hover:text-primary">Valeurs</a>
                     <a href="#services" class="nav-link text-gray-700 hover:text-primary">Services</a>
                     <a href="#products" class="nav-link text-gray-700 hover:text-primary">Produits</a>
-                    <a href="offre.html" class="nav-link text-gray-700 hover:text-primary">Offre d'emploi</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-primary">Contact</a>
-                    <a href="#contact" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 btn-slide">
-                        <span class="relative z-10">Devis</span>
+                    <a href="offre.html" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 btn-slide">
+                        <span class="relative z-10">Offre d'emploi</span>
                     </a>
                 </div>
             </div>
@@ -414,6 +424,19 @@
                         <li class="mb-1">
                             <a class="block p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded" href="#home">Accueil</a>
                         </li>
+                        <li class="mb-1 relative group">
+                            <a href="#" class="flex items-center justify-between w-full p-4 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded">
+                            Qui sommes-nous ?
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <ul class="pl-4 hidden group-hover:block">
+                                <li>
+                                    <a href="propos.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">A propos de nous</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="mb-1">
                             <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#values">Valeurs</a>
                         </li>
@@ -423,8 +446,7 @@
                         <li class="mb-1">
                             <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#products">Produits</a>
                         </li>
-                        <li class="mb-1">
-                            <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="offre.html">Offre d'emploi</a>
+                       
                         <li class="mb-1">
                             <a class="block p-4 text-sm font-semibold text-gray-700 nav-link" href="#contact">Contact</a>
                         </li>
@@ -432,11 +454,11 @@
                 </div>
                 <div class="mt-auto">
                     <div class="pt-6">
-                        <a class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-primary hover:bg-opacity-90 text-white rounded" href="#contact">Demander un devis</a>
+                        <a class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-primary hover:bg-opacity-90 text-white rounded" href="offre.html">Offre d'emploi</a>
                     </div>
-                    <p class="my-4 text-xs text-center text-gray-500">
-                        <span>© 2025 HBG Internationale</span>
-                    </p>
+                    <p class="my-0 text-xs text-center text-gray-500">
+    <span>© 2025 HBG Internationale</span>
+</p>
                 </div>
             </nav>
         </div>
@@ -457,7 +479,7 @@
                 </div>
             </div>
             <div class="absolute inset-0 transition-opacity duration-700" data-slide="1" style="opacity:0; z-index:1;">
-                <img src="img/17.jpg" alt="HBG Slide 2" class="w-full h-full object-cover absolute inset-0" style="z-index:0;">
+                <img src="img/slider3.png" alt="HBG Slide 2" class="w-full h-full object-cover absolute inset-0" style="z-index:0;">
                 <div class="absolute inset-0 flex items-center justify-center z-10">
                     <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 md:p-8 max-w-md mx-4 text-center transform transition-all duration-500 hover:scale-105">
                         <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Solutions sur mesure</h3>
@@ -508,10 +530,10 @@
                 </div>
                 <div class="md:w-1/2 slide-up">
                     <div class="relative">
-                        <img src="img/hbg.png" alt="Notre équipe" class="rounded-lg w-full h-auto md:h-full about-img-animation">
+                        <img src="img/ekipe.png" alt="Notre équipe" class="rounded-lg w-full h-auto md:h-full about-img-animation">
                         <div class="absolute -bottom-6 -right-6 bg-accent text-white p-6 rounded-lg shadow-lg">
-                            <p class="text-xl font-bold">10+</p>
-                            <p class="text-sm">Années d'expérience</p>
+                            <p class="text-xl font-bold">HBG</p>
+                            <p class="text-sm"> main dans la main avec nos clients</p>
                         </div>
                     </div>
                 </div>
